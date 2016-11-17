@@ -1,0 +1,70 @@
+{% extends 'layout' %}
+
+{% block title %}Eszközök böngészése{% endblock %}
+{% block content %}
+  <h1>Eszközök böngészése</h1>
+  <form action="/items" method="GET">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="inputItemName">Eszköz neve</label>
+          <input type="text" class="form-control" placeholder="Eszköz neve" id="inputItemName" name="itemName" value="{{ filters.itemName }}">
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="inputCategory">Kategória</label>
+          <select class="form-control" id="inputCategory" name="category">
+            <option value="">--</option>
+            {% for category in categories %}
+            {% if filters.category == category.id %}
+            <option value="{{ category.id }}" selected>{{ category.name }}</option>
+            {% else %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>&nbsp;</label>
+          <button class="btn btn-block btn-primary" type="submit">Szűrés</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <h2>Találatok ({{ items.total }})</h2>
+  {% for itemBatch in item.data | batch(3) %}
+  <div class="row">
+    {% for item in itemBatch %}
+    <div class="col-md-4">
+      <a class="result-item" href="/items/{{ item.id }}">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <strong>{{ item.name }}</strong><br>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  Nincs a szűrésnek megfelelő eszköz.
+  {% endfor %}
+  {% if items.lastPage > 1 %}
+  <div class="text-center">
+    <ul class="pagination">
+      {% for page in range(1, items.lastPage + 1) %}
+      {% if page == items.currentPage %}
+      <li class="active">
+        <a href="/recipes?p={{ page }}&amp;recipeName={{ filters.recipeName }}&amp;category={{ filters.category }}&amp;createdBy={{ filters.createdBy }}">{{ page }}</a>
+      </li>
+      {% else %}
+      <li><a href="/recipes?p={{ page }}&amp;recipeName={{ filters.recipeName }}&amp;category={{ filters.category }}&amp;createdBy={{ filters.createdBy }}">{{ page }}</a></li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+{% endblock %}

@@ -3,6 +3,7 @@
 const Database = use('Database')
 const Category = use('App/Model/Category')
 const Item = use('App/Model/Item')
+const User = use('App/Model/User')
 
 class ItemController{
     * index(request, response){
@@ -11,8 +12,6 @@ class ItemController{
 
     * list(request, response){
         const categories = yield Category.all()
-
-        console.log(categories.toJSON())
 
        for(let category of categories){
            const topItems = yield category.items().limit(3).fetch()
@@ -37,6 +36,32 @@ class ItemController{
             item: items.toJSON()
         })
     }
+
+    * search (request, response) {
+        const page = Math.max(1, request.input('p'))
+        const filters = {
+            itemName: request.input('itemName') || '',
+            category: request.input('category') || 0
+        }
+
+        const items = yield Item.query()
+        .where(function () {
+            if (filters.category > 0) this.where('category_id', filters.category)
+            if (filters.itemName.length > 0) this.where('name', 'LIKE', `%${filters.itemName}%`)
+        })
+        .with('user')
+        .paginate(page, 9)
+
+        const categories = yield Category.all()
+        const users = yield User.all()
+
+        yield response.sendView('itemSearch', {
+            items: items.toJSON(),
+            categories: categories.toJSON(),
+            users: users.toJSON(),
+            filters
+        })
+  }
 }
 
 module.exports = ItemController
