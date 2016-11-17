@@ -19,3 +19,4 @@ const Route = use('Route')
 
 //Route.on('/').render('main')
 Route.get('/', 'ItemController.index')
+Route.get('/items/list', 'ItemController.list')

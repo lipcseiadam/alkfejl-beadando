@@ -1,0 +1,28 @@
+{% extends 'layout' %}
+
+{% block content %}
+
+<h2>{{ name }}</h2>
+
+<div class="row">
+  {% for category in categories %}
+  <div class="col-md-4 col-sm-6">
+    <div class="panel panel-default">
+      <b><div class="panel-heading">
+        {{ category.name }}
+        <span class="label label-warning pull-right">Összes megtekintése</span>
+      </div></b>
+      <ul class="list-group">
+        {% for item in category.topItems %}
+        <li class="list-group-item">
+          <a href="/items/{{ item.id }}">
+             {{ item.name }} 
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -2,7 +2,7 @@
 
 const Schema = use('Schema')
 
-class CategoriesTableSchema extends Schema {
+class CategoriesSchema extends Schema {
 
   up () {
     this.create('categories', (table) => {
@@ -18,4 +18,4 @@ class CategoriesTableSchema extends Schema {
 
 }
 
-module.exports = CategoriesTableSchema
+module.exports = CategoriesSchema
