@@ -23,6 +23,20 @@ class ItemController{
            categories: categories.toJSON()
        })
     }
+
+    * show(request, response){
+        const id = request.param('id')        
+        const items = yield Item.find(id)
+        //console.log(recipes.toJSON())
+        if(!items){
+            response.notFound('Item does not found')
+            return
+        }
+        yield items.related('category').load()
+        yield response.sendView('showItem', {
+            item: items.toJSON()
+        })
+    }
 }
 
 module.exports = ItemController

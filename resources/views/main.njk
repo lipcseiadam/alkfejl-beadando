@@ -2,10 +2,12 @@
 
 
 {% block content %}
-
-<!--<img src="../../../docs/images/jogok.png" width="230" height="189">-->
+{% if currentUser %}
+<img src="../../docs/images/rent.jpg" width="230" height="189">
+{% else %}
+    <img src="rent.jpg" width="230" height="189">
     <h2 align="center"><strong>Eszközkölcsönző</strong></h2>
     <p align="center">Az oldal a kollégiumban elérhető eszközök kölcsönzésére szolgál.</p>
     <p align="center">Amennyiben még nem regisztráltál, kérlek tedd meg a regisztráció menüpont alatt, vagy kattints <a href="/"> ide </a></p>
-
+{% endif %}
 {% endblock %}
