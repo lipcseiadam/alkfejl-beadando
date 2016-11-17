@@ -1,9 +1,11 @@
 'use strict'
 
+const Database = use('Database')
+
 class ItemController{
     * index(request, response){
         yield response.sendView('main', {
-           //categories: categories.toJSON()
+           //const categories = yield Database.from('categories').select('*')
         })
     }
 }
