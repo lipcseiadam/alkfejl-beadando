@@ -19,16 +19,22 @@ const Route = use('Route')
 
 //Route.on('/').render('main')
 Route.get('/', 'ItemController.index')
-Route.get('/items/list', 'ItemController.list')
-Route.get('/items', 'ItemController.search')
-Route.get('/myitems', '')
+
 Route.get('/register', 'UserController.register')
 Route.post('/register', 'UserController.doRegister')
 Route.get('/logout', 'UserController.doLogout')
 Route.get('/login', 'UserController.login')
 Route.post('/login', 'UserController.doLogin')
 
+Route.get('/myitems', '').middleware('auth')//TODO
+Route.get('/createcategory', 'CategoryController.create').middleware('auth')
+Route.post('/createcategory', 'CategoryController.doCreate').middleware('auth')
+
 Route.get('/items/create', 'ItemController.create').middleware('auth')
 Route.post('/items/create', 'ItemController.doCreate').middleware('auth')
 
+Route.get('/items/list', 'ItemController.list')
+Route.get('/items', 'ItemController.search')
 Route.get('/items/:id', 'ItemController.show').middleware('auth')
+
+Route.get('/users', 'UserController.show').middleware('auth')

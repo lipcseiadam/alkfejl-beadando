@@ -2,6 +2,7 @@
 
 const User = use('App/Model/User')
 const Hash = use('Hash')
+const Validator = use('Validator')
 
 class UserController {
 
@@ -12,7 +13,7 @@ class UserController {
   * doRegister(request, response) {
     const registerData = request.except('_csrf');
     const rules = {
-      name: 'required|alpha_numeric',
+      name: 'required',
       username: 'required|alpha_numeric|unique:users',
       email: 'required|email|unique:users',
       roomnumber: 'required|alpha_numeric|unique:users',
@@ -75,6 +76,19 @@ class UserController {
   * doLogout (request, response) {
     yield request.auth.logout()
     response.redirect('/')
+  }
+
+  * show(request,response){
+    const users = yield User.all()
+
+       /*for(let user of users){
+           const topUsers = yield user.items().fetch()
+           user.topUsers = topUsers.toJSON()
+       }*/
+
+       yield response.sendView('userlist', {
+           users: users.toJSON()
+       })
   }
 
 }

@@ -93,7 +93,7 @@ class ItemController{
         itemData.user_id = request.currentUser.id
         yield Item.create(itemData);
 
-        response.redirect('/');
+        response.redirect('/items/create');
     }
 }
 

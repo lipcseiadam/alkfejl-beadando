@@ -26,9 +26,6 @@
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
             <span class="sr-only">Menüpontok</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/">Eszközkölcsönző</a>
         </div>
@@ -44,8 +41,8 @@
           {% endif %}
           {% if currentUser.administrator == 1 %}
           <ul class="nav navbar-nav">
-              <li class="dropdown open">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Módosítás<span class="caret"></span></a>
+              <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Hozzáadás<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="/createcategory">Kategória hozzáadása</a></li>
                 <li><a href="/items/create">Eszköz hozzáadása</a></li>
@@ -53,18 +50,19 @@
             </li>
           </ul>
           <ul class="nav navbar-nav">
-              <li><a href="/users">Felhasználók</a></li>
+              <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Adatok<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/users">Felhasználók</a></li>
+                <li><a href="/items/create">Eszközök</a></li>
+                <li><a href="/items/create">Kategóriák</a></li>
+              </ul>
+            </li>
           </ul>
           {% endif %}
-          <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <input class="form-control" placeholder="Keresés" type="text">
-            </div>
-            <button type="submit" class="btn btn-default">Keresés</a></button>
-          </form>
           <ul class="nav navbar-nav navbar-right">
             {% if currentUser %}
-            <li class="navbar-text">Üdv, {{currentUser.name}} ({{currentUser.roomnumber}})!</li>
+            <li class="navbar-text">{{currentUser.name}} ({{currentUser.roomnumber}})</li>
             <li><a href="/logout"> Kilépés</a></li>
             {% else %}
             <li><a href="/login"> Belépés</a></li>
