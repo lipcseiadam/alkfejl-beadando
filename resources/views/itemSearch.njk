@@ -58,10 +58,10 @@
       {% for page in range(1, items.lastPage + 1) %}
       {% if page == items.currentPage %}
       <li class="active">
-        <a href="/recipes?p={{ page }}&amp;recipeName={{ filters.recipeName }}&amp;category={{ filters.category }}&amp;createdBy={{ filters.createdBy }}">{{ page }}</a>
+        <a href="/items?p={{ page }}&amp;itemName={{ filters.itemName }}&amp;category={{ filters.category }}&amp">{{ page }}</a>
       </li>
       {% else %}
-      <li><a href="/recipes?p={{ page }}&amp;recipeName={{ filters.recipeName }}&amp;category={{ filters.category }}&amp;createdBy={{ filters.createdBy }}">{{ page }}</a></li>
+      <li><a href="/items?p={{ page }}&amp;itemName={{ filters.itemName }}&amp;category={{ filters.category }}&amp">{{ page }}</a></li>
       {% endif %}
       {% endfor %}
     </ul>

@@ -9,7 +9,7 @@
 {{ item.description }}
 </pre>
 
-{% if currentUser.id == item.user_id%}
+{% if currentUser.administrator == 1%}
 <a class="btn btn-primary" href="/items/{{item.id}}/edit"
 <a class="btn btn-danger" href="/items/{{item.id}}/delete"
 {% endif  %}

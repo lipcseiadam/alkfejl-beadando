@@ -12,13 +12,14 @@ class UserController {
   * doRegister(request, response) {
     const registerData = request.except('_csrf');
     const rules = {
+      name: 'required|alpha_numeric',
       username: 'required|alpha_numeric|unique:users',
       email: 'required|email|unique:users',
       roomnumber: 'required|alpha_numeric|unique:users',
       password: 'required|min:4',
       password_confirm: 'required|same:password',
     }
-    /*const validation = yield Validator.validateAll(registerData, rules);
+    const validation = yield Validator.validateAll(registerData, rules);
     if (validation.fails()) {
       yield request
         .withAll()
@@ -27,10 +28,11 @@ class UserController {
 
       response.redirect('back')
       return
-    }*/
+    }
 
     const user = new User();
-
+    
+    user.name = registerData.name
     user.username = registerData.username
     user.email = registerData.email
     user.roomnumber = registerData.roomnumber
@@ -42,6 +44,33 @@ class UserController {
 
     response.redirect('/');
   }
+
+  * login(request,response){
+        yield response.sendView('login')
+    }
+
+  * doLogin(request,response){
+        const username = request.input('username')
+        const password = request.input('password')
+        console.log(username)
+
+        try{
+            const login = yield request.auth.attempt(username, password)
+            if(login){
+                response.redirect('/')
+                return
+            }
+        }
+        catch(err){
+            yield request
+                .withAll()
+                .andWith({ errors: [err] })
+                .flash()
+
+            response.redirect('back')
+            return            
+        }
+    }
 
   * doLogout (request, response) {
     yield request.auth.logout()
