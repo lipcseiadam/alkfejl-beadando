@@ -25,6 +25,8 @@ Route.post('/register', 'UserController.doRegister')
 Route.get('/logout', 'UserController.doLogout')
 Route.get('/login', 'UserController.login')
 Route.post('/login', 'UserController.doLogin')
+Route.get('/profile', 'UserController.showProfile')
+Route.post('/profile', 'UserController.editProfile')
 
 Route.get('/myitems', 'RentController.myitems').middleware('auth')//TODO
 Route.get('/items/rented/', 'RentController.showRenteditems').middleware('auth')

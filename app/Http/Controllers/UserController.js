@@ -16,7 +16,7 @@ class UserController {
       name: 'required',
       username: 'required|alpha_numeric|unique:users',
       email: 'required|email|unique:users',
-      roomnumber: 'required|alpha_numeric|unique:users',
+      roomnumber: 'required|alpha_numeric',
       password: 'required|min:4',
       password_confirm: 'required|same:password',
     }
@@ -83,6 +83,52 @@ class UserController {
        yield response.sendView('userlist', {
            users: users.toJSON()
        })
+  }
+
+  * showProfile(request,response){
+      const users = yield User.find(request.currentUser.id)
+      yield response.sendView('userProfile', {
+           users: users.toJSON()
+       })
+  }
+
+  * editProfile(request,response){
+        const userData = request.except('_csrf');
+        const rules = {
+          name: 'required',
+          username: 'required|alpha_numeric',
+          email: 'required|email',
+          roomnumber: 'required|alpha_numeric',
+          password: 'required|min:4',
+          password_confirm: 'required|same:password',
+        }
+        const validation = yield Validator.validateAll(userData, rules);
+        if(validation.fails()){
+            yield request
+                .withAll()
+                .andWith({ errors: validation.messages() })
+                .flash()
+
+            response.redirect('back')
+            return
+        }
+       
+        const user = yield User.find(request.currentUser.id)
+
+        if(!request.currentUser){
+            response.unauthorized()
+            return
+        }
+
+        user.name = userData.name
+        user.username = userData.username
+        user.email = userData.email
+        user.roomnumber = userData.roomnumber
+        user.password = yield Hash.make(userData.password)
+
+        yield user.save();
+
+        response.redirect('/');
   }
 
 }

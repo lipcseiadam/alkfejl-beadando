@@ -62,7 +62,7 @@
           {% endif %}
           <ul class="nav navbar-nav navbar-right">
             {% if currentUser %}
-            <li class="navbar-text">{{currentUser.name}} ({{currentUser.roomnumber}})</li>
+            <li><a href="/profile">{{currentUser.name}} ({{currentUser.roomnumber}})
             <li><a href="/logout"> Kilépés</a></li>
             {% else %}
             <li><a href="/login"> Belépés</a></li>
