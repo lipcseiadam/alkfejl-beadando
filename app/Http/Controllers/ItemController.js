@@ -27,7 +27,6 @@ class ItemController{
     * show(request, response){
         const id = request.param('id')        
         const items = yield Item.find(id)
-        //console.log(recipes.toJSON())
         if(!items){
             response.notFound('Item does not found')
             return
@@ -53,8 +52,6 @@ class ItemController{
             .paginate(page, 9)
 
         const categories = yield Category.all()
-
-        console.log(items.toJSON())
 
         yield response.sendView('itemSearch', {
             items: items.toJSON(),
@@ -209,11 +206,10 @@ class ItemController{
             response.unauthorized()
             return
         }
-        console.log(itemData.quantity)
-        item.quantity = (itemData.quantity)-1
+        item.quantity = item.quantity-itemData.quantity
+        item.rented = itemData.quantity
 
         yield item.save();
-        console.log(item.quantity)
         response.redirect('/items/list');
     }        
 }

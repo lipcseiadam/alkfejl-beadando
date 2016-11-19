@@ -9,8 +9,11 @@
 {{ item.description }}
 </pre>
 {% if currentUser %}
+    <p>Elérhető mennyiség: {{item.quantity}}</p>
     <a href="" class="btn btn-success">Kedvencekhez adás</a>
     <a href="/items/{{item.id}}/rent" class="btn btn-info">Kölcsönzés</a>
+
+    
 
 {% endif  %}
 {% if currentUser.administrator == 1 %}

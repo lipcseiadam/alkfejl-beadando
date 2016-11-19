@@ -53,7 +53,6 @@ class UserController {
   * doLogin(request,response){
         const username = request.input('username')
         const password = request.input('password')
-        console.log(username)
 
         try{
             const login = yield request.auth.attempt(username, password)
@@ -80,11 +79,6 @@ class UserController {
 
   * show(request,response){
     const users = yield User.all()
-
-       /*for(let user of users){
-           const topUsers = yield user.items().fetch()
-           user.topUsers = topUsers.toJSON()
-       }*/
 
        yield response.sendView('userlist', {
            users: users.toJSON()
