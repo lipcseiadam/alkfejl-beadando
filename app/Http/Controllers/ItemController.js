@@ -5,6 +5,7 @@ const Category = use('App/Model/Category')
 const Item = use('App/Model/Item')
 const User = use('App/Model/User')
 const Validator = use('Validator')
+const Rent = use('App/Model/Rent')
 
 class ItemController{
     * index(request, response){
@@ -179,7 +180,7 @@ class ItemController{
 
         yield response.sendView('rentItem', {
             categories: categories.toJSON(),
-            item: item.toJSON()
+            item: item.toJSON(),
         });
     }
 
@@ -201,17 +202,36 @@ class ItemController{
 
         const id = request.param('id')        
         const item = yield Item.find(id)
+        const rent = new Rent();
+        const user = request.currentUser
 
         if(!request.currentUser){
             response.unauthorized()
             return
         }
         item.quantity = item.quantity-itemData.quantity
-        item.rented = itemData.quantity
+        item.rented = (item.rented)+(itemData.quantity)
+        rent.user_id = user.id
+        rent.name = user.name
+        rent.roomnumber = user.roomnumber
+        rent.email = user.email
+        rent.item_id = item.id
+        rent.quantity = itemData.quantity
+        rent.item_name = item.name
 
         yield item.save();
+        yield rent.save();
+
         response.redirect('/items/list');
-    }        
+    }       
+
+    * myitems(request,response){
+        const rents = yield Rent.findBy('user_id', request.currentUser.id)
+        yield response.sendView('showMyItems', {
+            rents: rents.toJSON()
+        })
+        console.log(rents.toJSON())
+    } 
 }
 
 module.exports = ItemController

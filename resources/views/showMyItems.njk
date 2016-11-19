@@ -1,0 +1,26 @@
+{% extends 'layout' %}
+
+{% block content %}
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Eszköz neve</th>
+      <th>Mennyiség</th>
+    </tr>
+  </thead>
+  {% for rent in rents %}
+  <tbody>
+    <tr>
+      <td>{{rent.id}}</td>
+      <td>{{rent.item_name}}</td>
+      <td>{{rent.quantity}} db</td>
+    </tr>
+    <tr>
+  </tbody>
+  {% endfor %}
+</table> 
+
+
+{% endblock %}

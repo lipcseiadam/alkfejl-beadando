@@ -26,7 +26,7 @@ Route.get('/logout', 'UserController.doLogout')
 Route.get('/login', 'UserController.login')
 Route.post('/login', 'UserController.doLogin')
 
-Route.get('/myitems', '').middleware('auth')//TODO
+Route.get('/myitems', 'ItemController.myitems').middleware('auth')//TODO
 
 Route.get('/categories/create', 'CategoryController.create').middleware('auth')
 Route.post('/categories/create', 'CategoryController.doCreate').middleware('auth')
