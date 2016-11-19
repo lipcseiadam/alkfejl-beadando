@@ -26,8 +26,9 @@ Route.get('/logout', 'UserController.doLogout')
 Route.get('/login', 'UserController.login')
 Route.post('/login', 'UserController.doLogin')
 
-Route.get('/myitems', 'ItemController.myitems').middleware('auth')//TODO
-Route.get('/items/rented', 'ItemController.showitems').middleware('auth')
+Route.get('/myitems', 'RentController.myitems').middleware('auth')//TODO
+Route.get('/items/rented/', 'RentController.showRenteditems').middleware('auth')
+Route.get('/items/rented/:id/delete', 'RentController.doDeleteRent').middleware('auth') 
 
 Route.get('/categories/create', 'CategoryController.create').middleware('auth')
 Route.post('/categories/create', 'CategoryController.doCreate').middleware('auth')
@@ -39,8 +40,8 @@ Route.get('/items/:id/edit', 'ItemController.edit').middleware('auth')
 Route.post('/items/:id/edit', 'ItemController.doEdit').middleware('auth')
 Route.get('/items/:id/delete', 'ItemController.doDelete').middleware('auth') 
 
-Route.get('/items/:id/rent', 'ItemController.rent').middleware('auth')
-Route.post('/items/:id/rent', 'ItemController.doRent').middleware('auth')
+Route.get('/items/:id/rent', 'RentController.rent').middleware('auth')
+Route.post('/items/:id/rent', 'RentController.doRent').middleware('auth')
 
 Route.get('/items/list', 'ItemController.list')
 Route.get('/items', 'ItemController.search')

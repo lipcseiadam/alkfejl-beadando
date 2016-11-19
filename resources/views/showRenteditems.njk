@@ -19,6 +19,7 @@
       <th>{{rent.item_name}}</th>
       <th>{{rent.quantity}}</th>
       <th>{{rent.name}}({{rent.roomnumber}})</th>
+      <th><a href="/items/rented/{{rent.id}}/delete" class="btn btn-primary btn-xs">Kölcsönzés törlése</a></th>
     </tr>
 {% endfor %}
 
