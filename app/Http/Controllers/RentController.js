@@ -82,12 +82,15 @@ class RentController{
     * myitems(request,response){
         const categories = yield Category.all()
         const users = yield User.all()
-        const id = request.currentUser.username
-        const rents = yield Rent.findBy('name', id)
+        const id = request.currentUser.id
+        const rents = yield Rent.findBy('user_id', request.currentUser.id)
         
-        //console.log(categories.toJSON())
-       // console.log(users.toJSON())
-        console.log(rents.toJSON())
+        console.log(rents)
+        if(!rents) {
+            yield response.sendView('main', {
+            })
+            return
+        }
         yield response.sendView('myItems', {
             categories: categories.toJSON(),
             rents: rents.toJSON()
