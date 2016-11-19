@@ -67,7 +67,7 @@ class ItemController{
         const categories = yield Category.all();
 
         yield response.sendView('createItem', {
-        categories: categories.toJSON()
+            categories: categories.toJSON()
         });
     }
 
@@ -95,6 +95,127 @@ class ItemController{
 
         response.redirect('/items/create');
     }
+
+     * edit(request, response){
+        const categories = yield Category.all();
+        const id = request.param('id')        
+        const item = yield Item.find(id)
+
+        if(request.currentUser.administrator != 1){
+            response.unauthorized('Nincs jog')
+            return
+        }
+
+        if(!item){
+            response.notFound('item does not found')
+            return
+        }
+
+        yield response.sendView('editItem', {
+            categories: categories.toJSON(),
+            item: item.toJSON()
+        });
+    }
+
+    * doEdit(request, response){
+        const itemData = request.except('_csrf');
+        const rules = {
+            name: 'required',
+            description: 'required',
+            quantity: 'required',
+            category_id: 'required'
+        }
+        const validation = yield Validator.validateAll(itemData, rules);
+        if(validation.fails()){
+            yield request
+                .withAll()
+                .andWith({ errors: validation.messages() })
+                .flash()
+
+            response.redirect('back')
+            return
+        }
+
+        const id = request.param('id')        
+        const item = yield Item.find(id)
+
+        if(request.currentUser.administrator != 1){
+            response.unauthorized()
+            return
+        }
+
+        item.name = itemData.name
+        item.description = itemData.description
+        item.quantity = itemData.quantity
+        item.category_id = itemData.category_id
+
+        yield item.save();
+
+        response.redirect('/items/list');
+    }
+
+    *doDelete(request, response){
+         const id = request.param('id')        
+        const item = yield Item.find(id)
+        if(!item){
+            response.notFound('item does not found')
+            return
+        }
+        yield item.delete()
+        response.redirect('/items/list')
+    }
+
+    *rent(request,response){
+        const categories = yield Category.all();
+        const id = request.param('id')        
+        const item = yield Item.find(id)
+
+        if(!request.currentUser){
+            response.unauthorized('Nincs jog')
+            return
+        }
+
+        if(!item){
+            response.notFound('item does not found')
+            return
+        }
+
+        yield response.sendView('rentItem', {
+            categories: categories.toJSON(),
+            item: item.toJSON()
+        });
+    }
+
+    * doRent(request, response){
+        const itemData = request.except('_csrf');
+        const rules = {
+            quantity: 'required',
+        }
+        const validation = yield Validator.validateAll(itemData, rules);
+        if(validation.fails()){
+            yield request
+                .withAll()
+                .andWith({ errors: validation.messages() })
+                .flash()
+
+            response.redirect('back')
+            return
+        }
+
+        const id = request.param('id')        
+        const item = yield Item.find(id)
+
+        if(!request.currentUser){
+            response.unauthorized()
+            return
+        }
+        console.log(itemData.quantity)
+        item.quantity = (itemData.quantity)-1
+
+        yield item.save();
+        console.log(item.quantity)
+        response.redirect('/items/list');
+    }        
 }
 
 module.exports = ItemController

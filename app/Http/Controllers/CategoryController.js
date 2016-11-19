@@ -26,7 +26,15 @@ class CategoryController{
 
         yield Category.create(categoryData);
 
-        response.redirect('/createcategory');
+        response.redirect('/categories/create');
+    }
+
+    * show(request,response){
+        const categories = yield Category.all()
+
+       yield response.sendView('categorylist', {
+           categories: categories.toJSON()
+       })
     }
 }
 

@@ -27,14 +27,22 @@ Route.get('/login', 'UserController.login')
 Route.post('/login', 'UserController.doLogin')
 
 Route.get('/myitems', '').middleware('auth')//TODO
-Route.get('/createcategory', 'CategoryController.create').middleware('auth')
-Route.post('/createcategory', 'CategoryController.doCreate').middleware('auth')
+
+Route.get('/categories/create', 'CategoryController.create').middleware('auth')
+Route.post('/categories/create', 'CategoryController.doCreate').middleware('auth')
+Route.get('/categories/list', 'CategoryController.show').middleware('auth')
 
 Route.get('/items/create', 'ItemController.create').middleware('auth')
 Route.post('/items/create', 'ItemController.doCreate').middleware('auth')
+Route.get('/items/:id/edit', 'ItemController.edit').middleware('auth')
+Route.post('/items/:id/edit', 'ItemController.doEdit').middleware('auth')
+Route.get('/items/:id/delete', 'ItemController.doDelete').middleware('auth') 
+
+Route.get('/items/:id/rent', 'ItemController.rent').middleware('auth')
+Route.post('/items/:id/rent', 'ItemController.doRent').middleware('auth')
 
 Route.get('/items/list', 'ItemController.list')
 Route.get('/items', 'ItemController.search')
-Route.get('/items/:id', 'ItemController.show').middleware('auth')
+Route.get('/items/:id', 'ItemController.show')//.middleware('auth')
 
 Route.get('/users', 'UserController.show').middleware('auth')
