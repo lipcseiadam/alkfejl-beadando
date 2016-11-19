@@ -10,6 +10,9 @@ class Item extends Lucid {
      user () {
         return this.belongsTo('App/Model/User')
   }
+    rent() {
+        return this.belongsToMany('App/Model/Rent')
+    }
 }
 
 module.exports = Item

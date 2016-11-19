@@ -27,6 +27,7 @@ Route.get('/login', 'UserController.login')
 Route.post('/login', 'UserController.doLogin')
 
 Route.get('/myitems', 'ItemController.myitems').middleware('auth')//TODO
+Route.get('/items/rented', 'ItemController.showitems').middleware('auth')
 
 Route.get('/categories/create', 'CategoryController.create').middleware('auth')
 Route.post('/categories/create', 'CategoryController.doCreate').middleware('auth')

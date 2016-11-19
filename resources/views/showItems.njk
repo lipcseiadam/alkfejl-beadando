@@ -1,0 +1,27 @@
+{% extends 'layout' %}
+
+{% block content %}
+
+<h1>Kikölcsönzött eszközök</h1>
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Eszköz neve</th>
+      <th>Mennyiség</th>
+      <th>Kölcsönző</th>
+    </tr>
+  </thead>
+{% for rent in rent %}
+    <tr>
+      <th>{{rent.id}}</th>
+      <th>{{rent.item_name}}</th>
+      <th>{{rent.quantity}}</th>
+      <th>{{rent.name}}({{rent.roomnumber}})</th>
+    </tr>
+{% endfor %}
+
+</table> 
+
+{% endblock %}

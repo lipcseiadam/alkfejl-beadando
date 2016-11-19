@@ -8,12 +8,12 @@ class RentsTableSchema extends Schema {
     this.create('rents', (table) => {
       table.increments()
       table.integer('user_id').unsigned().references('id').inTable('users')
-      table.string('name', 254).notNullable()
-      table.string('email', 254).notNullable()
-      table.string('roomnumber', 60).notNullable()
+      table.string('name', 254).notNullable().references('name').inTable('users')
+      table.string('email', 254).notNullable().references('email').inTable('users')
+      table.string('roomnumber', 60).notNullable().references('roomnumber').inTable('users')
       table.integer('item_id').unsigned().references('id').inTable('items')
-      table.string('item_name').notNullable()
-      table.integer('quantity').unsigned().notNullable()
+      table.string('item_name').notNullable().references('name').inTable('items')
+      table.integer('quantity').unsigned().notNullable().references('quantity').inTable('items')
       table.timestamps()
     })
   }

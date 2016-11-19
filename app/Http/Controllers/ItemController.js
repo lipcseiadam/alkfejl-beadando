@@ -225,12 +225,27 @@ class ItemController{
         response.redirect('/items/list');
     }       
 
+    * showitems(request,response){
+        const rents = yield Rent.all()//findBy('user_id', request.currentUser.id)
+        yield response.sendView('showItems', {
+            rent: rents.toJSON()
+        })
+    }
+
+    //TODO
     * myitems(request,response){
-        const rents = yield Rent.findBy('user_id', request.currentUser.id)
-        yield response.sendView('showMyItems', {
+        const categories = yield Category.all()
+        const users = yield User.all()
+        const id = request.currentUser.username
+        const rents = yield Rent.findBy('name', id)
+        
+        //console.log(categories.toJSON())
+       // console.log(users.toJSON())
+        console.log(rents.toJSON())
+        yield response.sendView('myItems', {
+            categories: categories.toJSON(),
             rents: rents.toJSON()
         })
-        console.log(rents.toJSON())
     } 
 }
 

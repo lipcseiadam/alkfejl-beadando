@@ -4,7 +4,7 @@ const Lucid = use('Lucid')
 
 class Rent extends Lucid {
     items () {
-        return this.belongsTo('App/Model/Item')
+        return this.belongsToMany('App/Model/Item')
   }
     user () {
         return this.belongsTo('App/Model/User')
