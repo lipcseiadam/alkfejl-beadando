@@ -234,19 +234,19 @@ Lokális környezet: Visual Studio Code
   Egyéb követelmények: Internet böngésző telepítése, JavaScript ajánlott
 
   **Program használata**
-  1, Böngészőben a főoldal megnyitása
-  2, Bejelentkezés vagy Regisztráció
-  3, Eszközök böngészése menüpont
-  4, Az eszköz nevére kattintva nézhetjük meg a tulajdonságait
-  5, Kedvencek gombbal a kedvencekhez adhatjuk
-  6, Kölcsönzés gombbal a mennyiség megadása után kikölcsönözhetjük
-  7, Kikölcsönzött eszközök menüpontban látható az összes kölcsönzésünk
-  8, Kedvencek menüpontban láthatóak a kedvenceink
+  1. Böngészőben a főoldal megnyitása
+  2. Bejelentkezés vagy Regisztráció
+  3. Eszközök böngészése menüpont
+  4. Az eszköz nevére kattintva nézhetjük meg a tulajdonságait
+  5. Kedvencek gombbal a kedvencekhez adhatjuk
+  6. Kölcsönzés gombbal a mennyiség megadása után kikölcsönözhetjük
+  7. Kikölcsönzött eszközök menüpontban látható az összes kölcsönzésünk
+  8. Kedvencek menüpontban láthatóak a kedvenceink
 
   **Adminisztrátor**
-  1, Hozzáadás gombbal adhatunk hozzá kategóriát és eszközt
-  2, Eszköz hozzáadásakor ellenőrzi, hogy kitöltöttük e az adatokat
-  3, Adatok menüpont alatt találjuk a felhasználók, eszközök és kategóriák menüket
-  4, Tudunk kategóriát rötölni, ha a kategória üres
-  5, tudunk eszközt törölni
-  6, Tudunk kölcsönzést törölni
+  1. Hozzáadás gombbal adhatunk hozzá kategóriát és eszközt
+  2. Eszköz hozzáadásakor ellenőrzi, hogy kitöltöttük e az adatokat
+  3. Adatok menüpont alatt találjuk a felhasználók, eszközök és kategóriák menüket
+  4. Tudunk kategóriát rötölni, ha a kategória üres
+  5. tudunk eszközt törölni
+  6. Tudunk kölcsönzést törölni
