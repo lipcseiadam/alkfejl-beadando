@@ -20,7 +20,7 @@
     {%if item.user_id == currentUser.id %}
     {% if item.category_id == category.id %}
       <tr class="warning">  
-      <td>{{ item.item_name }} </td>
+      <td><a href="/items/{{ item.id }}">{{ item.item_name }} </td>
       <td>{{ category.name }}</td>  
       </tr>
       {% endif %}

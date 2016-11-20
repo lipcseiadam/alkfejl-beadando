@@ -14,11 +14,8 @@ Az adminisztrátorok bővíthetik az eszközök listáját, módosíthatják a l
 - Vendégként a főoldalon szeretnék tudni beregisztrálni.
 - Vendégként a főoldalon szeretnék tudni bejelentkezni.
 - Vendégként szeretném az elérhető eszközök listáját megtekinteni.
-- Vendégként szeretnék eszközt keresni.
 - Felhasználóként szeretném látni az eszközök leírását.
-- Felhasználóként szeretnék tudni véleményt írni az eszközről.
 - Felhasználóként szeretnék kedvencek listát létrehozni az eszközökből.
-- Felhasználóként szeretnék keresni az eszközök között.
 - Felhasználóként szeretnék eszközt kölcsönözni.
 - Adminisztrátorként szeretnék új eszközt hozzáadni.
 - Adminisztrátorként szeretnék eszközöket törölni.
@@ -45,12 +42,10 @@ Az adminisztrátorok bővíthetik az eszközök listáját, módosíthatják a l
 - Regisztráció
 - Bejelentkezés
 - Eszközök listája
-- Keresés
 
 **Felhasználó:** Vendég és egyéb plusz funkciók
 
 - Eszközök leírásának megtekintése
-- Eszközök véleményezése
 - Kedvencek lista létrehozása
 - Kölcsönzés
 
@@ -93,9 +88,8 @@ Felhasználóként kölcsönzés:
 - Főoldal
 - Eszközök listája
   - Eszköz megtekintése
-    - Eszköz véleményezése
+    - Eszköz hozzáadása a kedvencekhez
     - Eszköz kölcsönzése
-- Eszközök keresése
 - Saját profil
 - Kijelentkezés
 
@@ -106,6 +100,7 @@ Felhasználóként kölcsönzés:
   - Eszközök felvétele
   - Eszközök módosítása
   - Eszközök törlése
+  - Kategóriák felvétele, törlése
   - Kölcsönzések törlése
   
 ######2.1.3. Végpontok:
@@ -113,20 +108,31 @@ Felhasználóként kölcsönzés:
 - `GET/`: főoldal
 - `GET/login`: bejelentkező oldal
 - `POST/login`: bejelentkező adatok felküldése
-- `GET/login/signup`: regisztrációs oldal
-- `POST/login/signup`: regisztrációs adatok felküldése
+- `GET/register`: regisztrációs oldal
+- `POST/register`: regisztrációs adatok felküldése
 - `GET/logout`: kijelentkező oldal
+- `GET/profile`: profil oldal
+- `POST/profile`: profil oldal adatok felküldése
+- `GET/users`: regisztrált felhasználók
 - `GET/items/list`: eszközlista oldal
 - `GET/items/id`: eszköz adatok
-- `POST/items/id`: új vélemény felvitele
-- `GET/items/favourit`: kedvencekhez adás
-- `POST/items/favourit`: kedvencekhez adás, adatok felküldése
-- `POST/items/reserve=id`: eszköz kölcsönzése
-- `GET/items/new`: új eszköz felvétele
-- `POST/items/new`: új eszköz felvételéhez szükséges adatok felküldése
-- `GET/items/delete=id`: eszköz törlése
-- `GET/items/edit=id`: eszköz módosítása
-- `POST/items/edit=id`: eszköz módosítása, adatok felküldése
+- `GET/myitems`: kikölcsönzött eszközeim 
+- `GET/items/rented/`: összes kikölcsönzött eszköz
+- `GET/items/rented/id/delete`: kölcsönzés törlése
+- `GET/favourites`: kedvencekhez eszközeim
+- `GET/items/:id/favourite`: kedvencekhez adás
+- `GET/categories/create`: kategória hozzáadása
+- `POST/categories/create`: kategória hozzáadása, adatok felküldése
+- `GET/categories/list`: kategóriák listája
+- `GET/categories/list/:id/delete`: kategória törlése
+- `POST/items/:id/rent`: eszköz kölcsönzése
+- `GET/items/:id/rent`: eszköz kölcsönzése, adatok felküldése
+- `GET/items/create`: új eszköz felvétele
+- `POST/items/create`: új eszköz felvételéhez szükséges adatok felküldése
+- `GET/items/:id/delete`: eszköz törlése
+- `GET/items/:id/edit`: eszköz módosítása
+- `POST/items/:id/edit`: eszköz módosítása, adatok felküldése
+
 
 ######2.1.4. Osztálymodell:
 
@@ -141,3 +147,106 @@ Felhasználóként kölcsönzés:
 ![Eszközlista](docs/images/eszkozlista.png)
 
 ![Kölcsönzés](docs/images/kolcsonzes.png)
+
+######2.1.6. Designtervek
+
+![Főoldal](docs/images/main.png)
+
+![Regisztráció](docs/images/regisztracio.png)
+
+![Eszközlista](docs/images/eszkozlistareal.png)
+
+![Eszköz adatlap](docs/images/eszkozprofil.png)
+
+![Kölcsönzés](docs/images/kolcsonzesreal.png)
+
+![Kedvencek](docs/images/kedvencek.png)
+
+![Kikölcsönzött eszközeim](docs/images/kikolcsonzotteszkozeim.png)
+
+![Összes kölcsönzés](docs/images/osszeskolcsonzes.png)
+
+![Felhasználók](docs/images/felhasznalok.png)
+
+![Kategóriák](docs/images/kategoriak.png)
+
+![Új eszköz](docs/images/ujeszkoz(admin).png)
+
+
+##3. Implementáció
+
+######3.1.1. Fejlesztőkörnyezet
+
+Lokális környezet: Visual Studio Code
+ - Mappa létrehoza
+ - npm install
+ - AdonisJS telepítése
+ - .env.example fájl átnevezése .env-re
+ - npm run dev paranccsal futtatni
+ - localhost:3333 megnyitása
+ - tudunk commitolni és pusholni Guthub-ra
+
+ ######3.1.2. Könyvtárstruktúra
+
+ alkfejl-beadando
+  - Controllers: 
+      - CategoryController.js
+      - FavouriteController.js
+      - ItemController.js
+      - RentController.js
+      - UserController.js
+  - Model
+      - Category.js
+      - Favourite.js 
+      - Item.js 
+      - Rent.js 
+      - Token.js
+      - User.js 
+   - resources
+    - views
+     - categorylist.njk
+     - createCategory.njk
+     - createItem.njk
+     - editItem.njk
+     - itemlist.njk
+     - itemSearch.njk
+     - layout.njk
+     - login.njk
+     - main.njk
+     - myFavourites.njk
+     - myItems.njk
+     - register.njk
+     - rentItem.njk
+     - showItem.njk
+     - showRenteditems.njk
+     - userlist.njk
+     - userProfile.njk
+   - .env
+   - ace
+   - package.json
+   - README.MD
+   - server.js
+
+##4. Felhasználói dokumentáció
+
+  Futtatáshoz szükséges operációs rendszer: Tetszőleges operációs rendszer
+  Futtatáshoz szükséges hardver: Operációs rendszerek szerint megadva
+  Egyéb követelmények: Internet böngésző telepítése, JavaScript ajánlott
+
+  **Program használata**
+  1, Böngészőben a főoldal megnyitása
+  2, Bejelentkezés vagy Regisztráció
+  3, Eszközök böngészése menüpont
+  4, Az eszköz nevére kattintva nézhetjük meg a tulajdonságait
+  5, Kedvencek gombbal a kedvencekhez adhatjuk
+  6, Kölcsönzés gombbal a mennyiség megadása után kikölcsönözhetjük
+  7, Kikölcsönzött eszközök menüpontban látható az összes kölcsönzésünk
+  8, Kedvencek menüpontban láthatóak a kedvenceink
+
+  **Adminisztrátor**
+  1, Hozzáadás gombbal adhatunk hozzá kategóriát és eszközt
+  2, Eszköz hozzáadásakor ellenőrzi, hogy kitöltöttük e az adatokat
+  3, Adatok menüpont alatt találjuk a felhasználók, eszközök és kategóriák menüket
+  4, Tudunk kategóriát rötölni, ha a kategória üres
+  5, tudunk eszközt törölni
+  6, Tudunk kölcsönzést törölni
