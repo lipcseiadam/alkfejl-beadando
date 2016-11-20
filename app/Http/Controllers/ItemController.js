@@ -16,7 +16,7 @@ class ItemController{
         const categories = yield Category.all()
 
        for(let category of categories){
-           const topItems = yield category.items().limit(3).fetch()
+           const topItems = yield category.items().fetch()
            category.topItems = topItems.toJSON()
        }
 
@@ -54,12 +54,11 @@ class ItemController{
             .paginate(page, 9)
 
         const categories = yield Category.all()
-        const users = yield User.all()
+        console.log(items)
 
         yield response.sendView('itemSearch', {
             items: items.toJSON(),
             categories: categories.toJSON(),
-            users: users.toJSON(),
             filters
         })
     }
@@ -79,6 +78,7 @@ class ItemController{
             description: 'required',
             category_id: 'required',
             quantity: 'required',
+            rented: 'required'
         }
         const validation = yield Validator.validateAll(itemData, rules);
         if (validation.fails()) {

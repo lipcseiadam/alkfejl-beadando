@@ -55,16 +55,20 @@ class RentController{
             response.unauthorized()
             return
         }
-        item.quantity = item.quantity-itemData.quantity
-        item.rented = (item.rented)+(itemData.quantity)
-        rent.user_id = user.id
-        rent.name = user.name
-        rent.roomnumber = user.roomnumber
-        rent.email = user.email
-        rent.item_id = item.id
-        rent.quantity = itemData.quantity
-        rent.item_name = item.name
-        rent.category_id = item.category_id
+
+        if(itemData.quantity <= item.quantity){
+            item.quantity = item.quantity-itemData.quantity
+            item.rented = (item.rented)+(itemData.quantity)
+            rent.user_id = user.id
+            rent.name = user.name
+            rent.roomnumber = user.roomnumber
+            rent.email = user.email
+            rent.item_id = item.id
+            rent.quantity = itemData.quantity
+            rent.item_name = item.name
+            rent.category_id = item.category_id
+        }
+        else{response.redirect('back'); return}
 
         yield item.save();
         yield rent.save();

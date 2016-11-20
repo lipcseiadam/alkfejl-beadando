@@ -35,6 +35,7 @@ Route.get('/items/rented/:id/delete', 'RentController.doDeleteRent').middleware(
 Route.get('/categories/create', 'CategoryController.create').middleware('auth')
 Route.post('/categories/create', 'CategoryController.doCreate').middleware('auth')
 Route.get('/categories/list', 'CategoryController.show').middleware('auth')
+Route.get('/categories/list/:id/delete', 'CategoryController.doDeleteCategory').middleware('auth')
 
 Route.get('/items/create', 'ItemController.create').middleware('auth')
 Route.post('/items/create', 'ItemController.doCreate').middleware('auth')
@@ -44,6 +45,9 @@ Route.get('/items/:id/delete', 'ItemController.doDelete').middleware('auth')
 
 Route.get('/items/:id/rent', 'RentController.rent').middleware('auth')
 Route.post('/items/:id/rent', 'RentController.doRent').middleware('auth')
+
+//Route.get('/items/:id/rent', 'RentController.rent').middleware('auth')
+//Route.post('/items/:id/rent', 'RentController.doRent').middleware('auth')
 
 Route.get('/items/list', 'ItemController.list')
 Route.get('/items', 'ItemController.search')

@@ -1,6 +1,7 @@
 'use strict'
 
 const Category = use('App/Model/Category')
+const Item = use('App/Model/Item')
 const Validator = use('Validator')
 
 class CategoryController{
@@ -35,6 +36,26 @@ class CategoryController{
        yield response.sendView('categorylist', {
            categories: categories.toJSON()
        })
+    }
+
+     * doDeleteCategory(request,response){
+        const id = request.param('id')        
+        const category = yield Category.find(id)
+        const item = yield Item.findBy('category_id', id)
+
+        console.log(category.id)
+        console.log(item.category_id)
+        if(!category){
+            response.notFound('category does not found')
+            return
+        }
+        if(category.id == item.category_id){
+            response.redirect('back')
+        }
+        else{
+            yield category.delete()
+            response.redirect('/categories/list')
+        }
     }
 }
 

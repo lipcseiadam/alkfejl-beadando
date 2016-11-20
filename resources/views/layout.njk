@@ -37,6 +37,7 @@
           {% if currentUser %}
             <ul class="nav navbar-nav">
               <li><a href="/myitems">Kikölcsönzött eszközeim</a></li>
+              <li><a href="/items/favourites">Kedvencek</a></li>
             </ul>
           {% endif %}
           {% if currentUser.administrator == 1 %}
@@ -60,6 +61,12 @@
             </li>
           </ul>
           {% endif %}
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input class="form-control" placeholder="Keresés" type="text">
+            </div>
+            <button type="submit" class="btn btn-default"><a href="/items">Keresés</a></button>
+          </form>
           <ul class="nav navbar-nav navbar-right">
             {% if currentUser %}
             <li><a href="/profile">{{currentUser.name}} ({{currentUser.roomnumber}})

@@ -10,14 +10,16 @@
       <th>Eszköz neve</th>
       <th>Mennyiség</th>
       <th>Kölcsönző</th>
+      <th>Dátum</th>
     </tr>
   </thead>
 {% for rent in rent %}
     <tr>
-      <th>{{rent.item_name}}</th>
-      <th>{{rent.quantity}}</th>
-      <th>{{rent.name}}({{rent.roomnumber}})</th>
-      <th><a href="/items/rented/{{rent.id}}/delete" class="btn btn-primary btn-xs">Kölcsönzés törlése</a></th>
+      <td>{{rent.item_name}}</tdth>
+      <td>{{rent.quantity}}</td>
+      <td>{{rent.name}}({{rent.roomnumber}})</td>
+      <td>{{rent.created_at}}</td>
+      <td><a href="/items/rented/{{rent.id}}/delete" class="btn btn-primary btn-xs">Kölcsönzés törlése</a></th>
     </tr>
 {% endfor %}
 
