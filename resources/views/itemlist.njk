@@ -16,7 +16,7 @@
     {% if item.quantity <= 0%}
       <tr class="danger"> 
     {%else%}
-      <tr class="success">  
+      <tr class="active">  
     {% endif %}
       {% if currentUser %} 
       <td> <a href="/items/{{ item.id }}"> {{ item.name }} </a></td> 
@@ -31,6 +31,7 @@
       {% else %}
       <th><class="btn btn-warning btn-xs">Nem kölcsönözhető</a></th>
       {% endif %}
+      <th><a href="/items/{{item.id}}/favourite" class="btn btn-info btn-xs">Kedvencekhez adás</a></th>
       {% endif %}       
       </tr>
     {% endfor %}

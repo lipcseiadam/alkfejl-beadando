@@ -26,6 +26,9 @@
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
             <span class="sr-only">Menüpontok</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/">Eszközkölcsönző</a>
         </div>
@@ -37,8 +40,8 @@
           {% if currentUser %}
             <ul class="nav navbar-nav">
               <li><a href="/myitems">Kikölcsönzött eszközeim</a></li>
-              <li><a href="/items/favourites">Kedvencek</a></li>
-              <li><a href="/items/search">Eszközök keresése</a></li>
+              <li><a href="/favourites">Kedvencek</a></li>
+              <!--<li><a href="/items/search">Eszközök keresése</a></li>-->
             </ul>
           {% endif %}
           {% if currentUser.administrator == 1 %}

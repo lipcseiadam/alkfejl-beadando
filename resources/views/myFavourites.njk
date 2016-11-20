@@ -1,0 +1,30 @@
+{% extends 'layout' %}
+
+{% block content %}
+
+<h2>Kedvenc eszközök</h2>
+
+{% extends 'layout' %}
+
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Név</th>
+      <th>Kategória</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for category in categories %}
+    {% for item in favourites %}
+    {%if item.user_id == currentUser.id %}
+    {% if item.category_id == category.id %}
+      <tr class="warning">  
+      <td>{{ item.item_name }} </td>
+      <td>{{ category.name }}</td>  
+      </tr>
+      {% endif %}
+    {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endblock %}
