@@ -64,6 +64,7 @@ class RentController{
         rent.item_id = item.id
         rent.quantity = itemData.quantity
         rent.item_name = item.name
+        rent.category_id = item.category_id
 
         yield item.save();
         yield rent.save();
@@ -80,11 +81,13 @@ class RentController{
 
     //TODO
     * myitems(request,response){
-        const categories = yield Category.all()
-        const users = yield User.all()
-        const id = request.currentUser.id
-        const rents = yield Rent.findBy('user_id', request.currentUser.id)
+        const categories = yield Category.all();
+        const users = yield User.all();
+        const id = request.currentUser.id;
+        const rents = yield Rent.all(id)
+        //const rents = yield Rent.findBy('user_id', id);
         
+        console.log(categories)
         console.log(rents)
         if(!rents) {
             yield response.sendView('main', {
@@ -94,6 +97,7 @@ class RentController{
         yield response.sendView('myItems', {
             categories: categories.toJSON(),
             rents: rents.toJSON()
+
         })
     } 
 

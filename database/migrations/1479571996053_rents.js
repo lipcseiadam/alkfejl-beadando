@@ -14,6 +14,7 @@ class RentsTableSchema extends Schema {
       table.integer('item_id').unsigned().references('id').inTable('items')
       table.string('item_name').notNullable().references('name').inTable('items')
       table.integer('quantity').unsigned().notNullable().references('quantity').inTable('items')
+      table.integer('category_id').unsigned().notNullable().references('id').inTable('categories')
       table.timestamps()
     })
   }

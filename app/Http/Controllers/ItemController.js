@@ -50,13 +50,16 @@ class ItemController{
                 if (filters.category > 0) this.where('category_id', filters.category)
                 if (filters.itemName.length > 0) this.where('name', 'LIKE', `%${filters.itemName}%`)
             })
+            .with('user')
             .paginate(page, 9)
 
         const categories = yield Category.all()
+        const users = yield User.all()
 
         yield response.sendView('itemSearch', {
             items: items.toJSON(),
             categories: categories.toJSON(),
+            users: users.toJSON(),
             filters
         })
     }
@@ -75,7 +78,7 @@ class ItemController{
             name: 'required',
             description: 'required',
             category_id: 'required',
-            quantity: 'required'
+            quantity: 'required',
         }
         const validation = yield Validator.validateAll(itemData, rules);
         if (validation.fails()) {

@@ -14,11 +14,15 @@
       </div></b>
       <ul class="list-group">
         {% for item in rents %}
+        {%if item.user_id == currentUser.id %}
         <li class="list-group-item">
           <a href="/items/{{ item.item_id }}">
-             {{ item.item_name }} 
+            {% if item.category_id == category.id %}
+             {{ item.item_name }}
+             {% endif %}
           </a>
         </li>
+        {% endif %}
         {% endfor %}
       </ul>
     </div>
