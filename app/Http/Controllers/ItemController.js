@@ -48,13 +48,12 @@ class ItemController{
         const items = yield Item.query()
             .where(function () {
                 if (filters.category > 0) this.where('category_id', filters.category)
-                if (filters.itemName.length > 0) this.where('name', 'LIKE', `%${filters.itemName}%`)
+                if (filters.itemName != 0) this.where('name', 'LIKE', `%${filters.itemName}%`)
             })
-            .with('user')
             .paginate(page, 9)
 
         const categories = yield Category.all()
-        console.log(items)
+        //const items = yield Item.all()
 
         yield response.sendView('itemSearch', {
             items: items.toJSON(),

@@ -50,7 +50,7 @@ Route.post('/items/:id/rent', 'RentController.doRent').middleware('auth')
 //Route.post('/items/:id/rent', 'RentController.doRent').middleware('auth')
 
 Route.get('/items/list', 'ItemController.list')
-Route.get('/items', 'ItemController.search')
-Route.get('/items/:id', 'ItemController.show')//.middleware('auth')
+Route.get('/items/search', 'ItemController.search')
+Route.get('/items/:id', 'ItemController.show').middleware('auth')
 
 Route.get('/users', 'UserController.show').middleware('auth')
