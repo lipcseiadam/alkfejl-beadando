@@ -1,5 +1,12 @@
 {% extends 'layout' %}
 
+
+{% block scripts %}
+<!--<script src="/scripts/main.js"></script>-->
+<script src="/scripts/popup_login.js"></script>
+{% endblock %}
+
+
 {% block content %}
 
 <h2>{{ item.name }}</h2>
@@ -12,6 +19,7 @@
     <p>Elérhető mennyiség: {{item.quantity}}</p>
     <a href="/items/{{item.id}}/favourite" class="btn btn-primary">Kedvencekhez adás</a>
     {% if item.quantity >= 0 %}
+        <!--TODO: popup-al megcsinálni -->
         <a href="/items/{{item.id}}/rent" class="btn btn-info">Kölcsönzés</a>
     {% endif %}
     
@@ -19,8 +27,9 @@
 {% endif  %}
 {% if currentUser.administrator == 1 %}
 <p></p>
+    <!--TODO popup-->
     <a href="/items/{{item.id}}/edit" class="btn btn-success">Szerkesztés</a>
-    <a href="/items/{{item.id}}/delete" class="btn btn-danger">Törlés</a>
+    <a href="/items/{{item.id}}/delete"  id="btnDelete" class="btn btn-danger">Törlés</a>
 {% endif  %}
 
 {% endblock %}
