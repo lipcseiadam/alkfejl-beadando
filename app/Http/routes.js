@@ -54,3 +54,12 @@ Route.get('/items/search', 'ItemController.search')
 Route.get('/items/:id', 'ItemController.show').middleware('auth')
 
 Route.get('/users', 'UserController.show').middleware('auth')
+
+
+
+//ajax
+
+Route.group('ajax', function () {
+  Route.delete('/items/:id/delete', 'ItemController.ajaxDelete').middleware('auth')
+  Route.post('/login', 'UserController.ajaxLogin')
+}).prefix('/ajax')

@@ -165,6 +165,19 @@ class ItemController{
         response.redirect('/items/list')
     }
 
+
+    //ajax
+    *ajaxDelete(request, response) {
+        const id = request.param('id')
+        const item = yield Item.find(id)
+        if (!item) {
+            response.notFound('Hiba történt a feldolgozás során!')
+        return
+        }
+        yield item.delete()
+        response.ok({success: true});
+    }
+
 }
 
 module.exports = ItemController

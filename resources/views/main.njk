@@ -1,6 +1,12 @@
 {% extends 'layout' %}
 
 
+{% block scripts %}
+<script src="/scripts/main.js"></script>
+<script src="/scripts/popup_login.js"></script>
+{% endblock %}
+
+
 {% block content %}
 {% if currentUser %}
 <img src="/assets/rent.png" align: "center">
@@ -8,6 +14,6 @@
     <img src="/assets/rent.png" align: "center">
     <h2 align="center"><strong>Eszközkölcsönző</strong></h2>
     <p align="center">Az oldal a kollégiumban elérhető eszközök kölcsönzésére szolgál.</p>
-    <p align="center">Amennyiben még nem regisztráltál, kérlek tedd meg a regisztráció menüpont alatt, vagy kattints <a href="/"> ide </a></p>
+    <p align="center">Amennyiben még nem regisztráltál, kérlek tedd meg a regisztráció menüpont alatt, vagy kattints <a href="/register"> ide </a></p>
 {% endif %}
 {% endblock %}
