@@ -13,10 +13,11 @@ function ajaxDelete(url) {
 }
 
 function my_confirm(question) {
-  // return Promise.resolve(confirm(question))
+  
   let _resolve
   let _reject
 
+  
   const $modal = $('.confirm-modal')
   $modal.modal('show')
 
@@ -38,7 +39,7 @@ $('#btnDelete').on('click', function (e) {
   e.preventDefault()
   my_confirm('Biztos törölni akarod?').then(response => {
     if (response) {
-      // /ajax/recipes/3/delete
+
       const url = '/ajax' + $(this).attr('href')
       ajaxDelete(url)
         .then(data => {

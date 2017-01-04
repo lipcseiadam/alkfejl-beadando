@@ -3,8 +3,7 @@
 
 {% block scripts %}
 <!--<script src="/scripts/main.js"></script>-->
-<script src="/scripts/popup_login.js"></script>
-
+<script src="/scripts/delete.js"></script>
 <script src="/scripts/smart_items.js"></script>
 {% endblock %}
 
@@ -21,8 +20,7 @@
     <p>Elérhető mennyiség: {{item.quantity}}</p>
     <a href="/items/{{item.id}}/favourite" class="btn btn-primary">Kedvencekhez adás</a>
     {% if item.quantity >= 0 %}
-        <!--TODO: popup-al megcsinálni -->
-        <a href="/items/{{item.id}}/rent" class="btn btn-info">Kölcsönzés</a>
+        <a href="/items/{{item.id}}/rent" class="btn btn-info" id="btnRent">Kölcsönzés</a>
     {% endif %}
     
 

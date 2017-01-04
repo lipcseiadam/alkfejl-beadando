@@ -63,4 +63,5 @@ Route.group('ajax', function () {
   Route.delete('/items/:id/delete', 'ItemController.ajaxDelete').middleware('auth')
   Route.post('/login', 'UserController.ajaxLogin')
   Route.post('/register', 'UserController.ajaxRegister')
+  Route.post('/items/:id/rent', 'RentController.ajaxRent').middleware('auth')
 }).prefix('/ajax')

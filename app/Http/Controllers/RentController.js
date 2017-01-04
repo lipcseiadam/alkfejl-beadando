@@ -126,6 +126,53 @@ class RentController{
         response.redirect('/items/rented')
     }
 
+
+        * ajaxRent(request, response){
+        const itemData = request.except('_csrf');
+        const rules = {
+            quantity: 'required',
+        }
+        const validation = yield Validator.validateAll(itemData, rules);
+        if(validation.fails()){
+            yield request
+                .withAll()
+                .andWith({ errors: validation.messages() })
+                .flash()
+
+            response.redirect('back')
+            return
+        }
+
+        const id = request.param('id')        
+        const item = yield Item.find(id)
+        const rent = new Rent();
+        const user = request.currentUser
+
+        if(!request.currentUser){
+            response.unauthorized()
+            return
+        }
+
+        if(itemData.quantity <= item.quantity){
+            item.quantity = item.quantity-itemData.quantity
+            item.rented = (item.rented)+(itemData.quantity)
+            rent.user_id = user.id
+            rent.name = user.name
+            rent.roomnumber = user.roomnumber
+            rent.email = user.email
+            rent.item_id = item.id
+            rent.quantity = itemData.quantity
+            rent.item_name = item.name
+            rent.category_id = item.category_id
+        }
+        else{response.redirect('back'); return}
+
+        yield item.save();
+        yield rent.save();
+
+        response.ok({ success: true })
+    }       
+
 }
 
 module.exports = RentController
