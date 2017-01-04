@@ -1,5 +1,9 @@
 {% extends 'layout' %}
 
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+{% endblock %}
+
 {% block content %}
 
 <h2>Eszköz szerkesztése</h2>
@@ -19,7 +23,8 @@
 </div>
 {% endif %}
 
-<form class="form-horizontal" action="" method="post">
+<form class="form-horizontal" action="" method="post"
+  data-toggle="validator">
 
   {{ csrfField }}
 
