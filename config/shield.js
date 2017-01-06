@@ -46,7 +46,7 @@ module.exports = {
   | @available options
   | DENY, SAMEORIGIN, ALLOW-FROM http://example.com
   */
-  xframe: 'DENY',
+  xframe: 'SAMEORIGIN',
 
   /*
   |--------------------------------------------------------------------------

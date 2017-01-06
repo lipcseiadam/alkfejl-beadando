@@ -1,5 +1,9 @@
 {% extends 'layout' %}
 
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+{% endblock %}
+
 {% block content %}
 
 <h2>Regisztráció</h2>
@@ -19,7 +23,8 @@
 </div>
 {% endif %}
 
-<form class="form-horizontal" action="" method="post">
+<form class="form-horizontal" action="" method="post"
+  data-toggle="validator">
 
   {{ csrfField }}
 
@@ -27,49 +32,55 @@
     <label for="name" class="col-lg-2 control-label">Név</label>
     <div class="col-lg-10">
       <input type="text" class="form-control" id="name" name="name" placeholder="Név"
-        value="{{ old('name') }}">
+        value="{{ old('name') }}" required>
+        <div class="help-block with-errors"></div>
     </div>
   </div>
   <div class="form-group">
     <label for="username" class="col-lg-2 control-label">Felhasználónév</label>
     <div class="col-lg-10">
       <input type="text" class="form-control" id="username" name="username" placeholder="Felhasználónév"
-        value="{{ old('username') }}">
+        value="{{ old('username') }}" required>
+        <div class="help-block with-errors"></div>
     </div>
   </div>
   <div class="form-group">
     <label for="email" class="col-lg-2 control-label">Email</label>
     <div class="col-lg-10">
       <input type="text" class="form-control" id="email" name="email" placeholder="Email cím"
-        value="{{ old('email') }}">
+        value="{{ old('email') }}" required>
+        <div class="help-block with-errors"></div>
     </div>
   </div>
     <div class="form-group">
     <label for="roomnumber" class="col-lg-2 control-label">Szobaszám</label>
     <div class="col-lg-10">
       <input type="text" class="form-control" id="roomnumber" name="roomnumber" placeholder="Szobaszám"
-        value="{{ old('roomnumber') }}">
+        value="{{ old('roomnumber') }}" required>
+        <div class="help-block with-errors"></div>
     </div>
   </div>
   <div class="form-group">
     <label for="password" class="col-lg-2 control-label">Jelszó</label>
     <div class="col-lg-10">
       <input type="password" class="form-control" id="password" name="password" placeholder="Jelszó"
-        value="">
+        value="" required>
+        <div class="help-block with-errors"></div>
     </div>
   </div>
   <div class="form-group">
     <label for="password_confirm" class="col-lg-2 control-label">Jelszó újra</label>
     <div class="col-lg-10">
       <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Jelszó megerősítése"
-        value="">
+        value="" required>
+        <div class="help-block with-errors"></div>
     </div>
   </div>
 
 
   <div class="form-group">
     <div class="col-lg-10 col-lg-offset-2">
-      <button type="reset" class="btn btn-default">Cancel</button>
+      <button type="reset" class="btn btn-default">Mégsem</button>
       <button type="submit" class="btn btn-primary">Submit</button>
     </div>
   </div>

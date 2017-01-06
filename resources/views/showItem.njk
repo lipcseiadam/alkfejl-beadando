@@ -2,7 +2,6 @@
 
 
 {% block scripts %}
-<!--<script src="/scripts/main.js"></script>-->
 <script src="/scripts/delete.js"></script>
 <script src="/scripts/popup_rent.js"></script>
 {% endblock %}
@@ -17,19 +16,35 @@
 {{ item.description }}
 </pre>
 {% if currentUser %}
+{{ csrfField | safe }}
     <p>Elérhető mennyiség: {{item.quantity}}</p>
     <a href="/items/{{item.id}}/favourite" class="btn btn-primary">Kedvencekhez adás</a>
-    {% if item.quantity >= 0 %}
+    {% if item.quantity > 0 %}
         <a href="/items/{{item.id}}/rent" class="btn btn-info" id="btnRent">Kölcsönzés</a>
     {% endif %}
     
 
 {% endif  %}
 {% if currentUser.administrator == 1 %}
-<p></p>
-    <!--TODO popup-->
-    <a href="/items/{{item.id}}/edit" class="btn btn-success">Szerkesztés</a>
-    <a href="/items/{{item.id}}/delete"  id="btnDelete" class="btn btn-danger">Törlés</a>
+{{ csrfField | safe }}
+
+    <a href="/items/{{item.id}}/edit" class="btn btn-success" role="button">Szerkesztés</a>
+    <a href="/items/{{item.id}}/delete"  id="btnDelete" class="btn btn-danger" role="button">Törlés</a>
+    <span class="help-block"></span>
+
+    <div class="modal fade confirm-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+        <div class="modal-body">
+            Biztosan törölni szeretnéd?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success modal-ok" data-dismiss="modal">OK</button>
+            <button type="button" class="btn btn-danger modal-cancel" data-dismiss="modal">Mégse</button>
+        </div>
+        </div>
+    </div>
+    </div>
 {% endif  %}
 
 {% endblock %}

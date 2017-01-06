@@ -3,7 +3,6 @@ $('#btnLogin').on('click', function (e) {
   const $modal = $('#loginModal')
   if ($modal.length>0) {
     $modal.modal('show')
-    console.log('if ág')
   } else {
     const $modal = $(`
       <div class="modal fade confirm-modal" tabindex="-1" role="dialog" id="loginModal">

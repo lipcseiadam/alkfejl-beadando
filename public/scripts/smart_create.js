@@ -1,4 +1,4 @@
-function insertName(item, $textarea1) {
+/*function insertName(item, $textarea1) {
   const $row = $(`
     <div class="form-group smart-name">
         <div class="col-lg-10">
@@ -70,7 +70,7 @@ $removeButton1 = $(`
     $removeButton1.attr("disabled", true);
     
   })
-
+*/
 
 function insertDescription(item, $textarea) {
   const $row = $(`

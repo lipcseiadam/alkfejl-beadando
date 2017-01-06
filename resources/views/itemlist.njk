@@ -27,7 +27,7 @@
       <tr class="active">  
     {% endif %}
       {% if currentUser %} 
-      <td> <a href="/items/{{ item.id }}"> {{ item.name }} </a></td> 
+      <td> <a href="/items/{{ item.id }}"> {{ item.name }} </a><div class="box"><iframe src="/items/{{ item.id }}" width = "400px" height = "400px"></iframe></div></td> 
       {% else %}
       <td>{{ item.name }}</td>
       {% endif %} 

@@ -13,16 +13,15 @@ function ajaxDelete(url) {
 }
 
 function my_confirm(question) {
-  //return Promise.resolve(confirm(question))
+  // return Promise.resolve(confirm(question))
   let _resolve
   let _reject
 
-  
   const $modal = $('.confirm-modal')
-  $modal.show()
+  $modal.modal('show')
 
   $modal.find('.modal-ok').on('click', function (e) {
-    _resolve(false)
+    _resolve(true)
   })
 
   $modal.find('.modal-cancel').on('click', function (e) {
@@ -36,11 +35,10 @@ function my_confirm(question) {
 }
 
 $('#btnDelete').on('click', function (e) {
- // e.preventDefault()
-  console.log('kérdés')
+  e.preventDefault()
   my_confirm('Biztos törölni akarod?').then(response => {
     if (response) {
-
+      // /ajax/recipes/3/delete
       const url = '/ajax' + $(this).attr('href')
       ajaxDelete(url)
         .then(data => {

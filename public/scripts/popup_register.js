@@ -8,7 +8,7 @@ $('#btnRegister').on('click', function (e) {
       <div class="modal fade confirm-modal" tabindex="-1" role="dialog" id="registerModal">
         <div class="modal-dialog modal-md" role="document">
           <div class="modal-content">
-            <div class="modal-header">Belépés</div>
+            <div class="modal-header">Regisztráció</div>
             <div class="modal-body">
               <div class="alert alert-danger"></div>
               <div class="form-area"></div>
@@ -54,3 +54,7 @@ $('#btnRegister').on('click', function (e) {
   
 
 })
+
+// $(document).on('click', 'a[href="/login"]', function (e) {
+
+// })

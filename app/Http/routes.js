@@ -41,7 +41,7 @@ Route.get('/items/create', 'ItemController.create').middleware('auth')
 Route.post('/items/create', 'ItemController.doCreate').middleware('auth')
 Route.get('/items/:id/edit', 'ItemController.edit').middleware('auth')
 Route.post('/items/:id/edit', 'ItemController.doEdit').middleware('auth')
-//Route.get('/items/:id/delete', 'ItemController.doDelete').middleware('auth') 
+Route.get('/items/:id/delete', 'ItemController.doDelete').middleware('auth') 
 
 Route.get('/favourites', 'FavouriteController.myFavourites').middleware('auth')
 Route.get('/items/:id/favourite', 'FavouriteController.doFavourite').middleware('auth')
