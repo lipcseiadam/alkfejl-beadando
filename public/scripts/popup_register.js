@@ -36,7 +36,7 @@ $('#btnRegister').on('click', function (e) {
         )
           .then(json => {
             if (json.success) {
-              $('#navContainer').load('/ #navContainer', function() {
+              $('#navContainer').load('/items/list #navContainer', function() {
                 $modal.modal('hide')
               })
             } else {
