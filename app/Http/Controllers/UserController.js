@@ -186,7 +186,7 @@ class UserController {
 
         yield request.auth.login(user)
 
-        response.redirect('/');
+        response.ok({ success: true })
   }
 
 }
