@@ -287,4 +287,3 @@ Lokális környezet: Visual Studio Code
     - Megnyitjuk a tesztelni kívánt oldalt 
     - A böngésző menüsávjánál megjelenik a Selenium ikonja
     - A tesztelőben küldönböző eseteket lehet felvenni, majd automatán teszteli
-
