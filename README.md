@@ -250,3 +250,41 @@ Lokális környezet: Visual Studio Code
   4. Tudunk kategóriát rötölni, ha a kategória üres
   5. tudunk eszközt törölni
   6. Tudunk kölcsönzést törölni
+
+##5. Kliensoldali JavaScript
+
+  ######5.1 Új funkciók
+
+    1, Belépés és regisztráció felugró ablakban.
+    2, A törlés funkció is csak a felugró ablak megerősítése után hajtódik végre (delete.js)
+    3, Eszközök kölcsönzésekor mind a listából, mind az eszköz oldaláról a mennyiség megadása és a klcsönzés felugró ablakban történik (popup_rent.js)
+    4, Eszköz hozzáadásakor és szerkesztésekor kliens oldalon történik a mező kitöltöttségének figyelése.
+
+  ######5.2 Funkciók működése
+    1, Belépés és regisztráció
+       - a popup_login és popup_register segítségével bekapcsolt javascript mellett a regisztrációkor és bejelentkezéskor 
+         csak a kitöltött form elküldése után töltődik újra az oldal.
+       - A UserController-ben 2 új funkció található, egy ajaxLogin és egy ajaxRegister, melyek működésükben a normál loginhoz és regisztrációhoz hasonlóak
+    2, törlés
+       - A felugró ablakon a megerősítés gomb megnyomása után `DELETE ajax/items/:id/delete` útvonalon az ItemController ajaxDelete metódusa hívódik meg
+    3, kölcsönzés
+       - A felugró ablakon a megerősítés gomb megnyomása után `POST ajax/items/:id/rent` útvonalon az ItemController ajaxRent metódusa hívódik meg
+    4, hozzáadás és szerkesztés
+       - A kliensoldali inputot a Bootstrap validátor figyeli
+
+  ######5.3 Szekvenciadiagram
+
+    Regisztráció, majd egy eszköz kölcsönzése
+
+    ![Regisztráció majd kölcsönzés](docs/images/szekvencia.png)
+
+
+##6. Tesztelés
+
+  A tesztelés a Selenium IDE Firefox pluginnal történik.
+  Telepítése: A firefox addon oldaláról telepíthető
+  Használata:
+    - Megnyitjuk a tesztelni kívánt oldalt 
+    - A böngésző menüsávjánál megjelenik a Selenium ikonja
+    - A tesztelőben küldönböző eseteket lehet felvenni, majd automatán teszteli
+

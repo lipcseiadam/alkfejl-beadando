@@ -76,10 +76,7 @@ function insertDescription(item, $textarea) {
   const $row = $(`
     <div class="form-group smart-description">
         <div class="col-lg-10">
-            <textarea class="form-control smart-description" rows="3" id="description" name="description" 
-            pattern="^\\S*$"
-            placeholder="leírás"
-            required></textarea>
+            <input required class="form-control smart-description" value="${item.description}" type="text">
         </div>
     </div>
   `)
@@ -89,14 +86,14 @@ function insertDescription(item, $textarea) {
 
 
 function collectDescription() {
+  const description = []
   $('.smart-description').each(function () {
     $this = $(this)
-    const description = $this.find('.smart-description').val()
+    const desc = $this.find('.smart-description').value
+    description.push({ desc })
+    
   })
   return description
-    // .map(ingr => `${ingr.amount} ${ingr.name}`)
-    //.map(({ description }) => `${description}`)
-    //.join('\n')
 }
 
 
@@ -148,6 +145,6 @@ $removeButton = $(`
 
 $('form').on('submit', function (e) {
   //e.preventDefault()
-  $textarea1.val(collectName() )
+  //$textarea1.val(collectName() )
   $textarea.val( collectDescription() )
 })
